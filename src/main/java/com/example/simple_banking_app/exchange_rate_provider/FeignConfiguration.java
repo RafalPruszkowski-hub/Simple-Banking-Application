@@ -1,0 +1,13 @@
+package com.example.simple_banking_app.exchange_rate_provider;
+
+import okhttp3.OkHttpClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+class FeignConfiguration {
+    @Bean
+    public OkHttpClient client() {
+        return new OkHttpClient();
+    }
+}
