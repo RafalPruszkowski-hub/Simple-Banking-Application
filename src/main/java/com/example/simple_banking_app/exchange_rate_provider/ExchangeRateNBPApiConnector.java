@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Optional;
 
-@FeignClient(value = "ExchangeRateProviderApiConnector",
+@FeignClient(name = "ExchangeRateProviderApiConnector",
         url = "https://api.nbp.pl/api/",
         configuration = FeignConfiguration.class)
 interface ExchangeRateNBPApiConnector extends ExchangeRateProviderApiConnector {
