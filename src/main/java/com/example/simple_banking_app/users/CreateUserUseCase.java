@@ -4,10 +4,11 @@ import com.example.simple_banking_app.account.api.AccountFacade;
 import com.example.simple_banking_app.account.api.dto.CreateAccount;
 import com.example.simple_banking_app.users.api.dto.CreateUser;
 import com.example.simple_banking_app.users.api.exceptions.CreatePersonInputError;
-import com.example.simple_banking_app.users.api.exceptions.UserNotFound;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.LocalDate;
 
 @Transactional
 class CreateUserUseCase {
@@ -54,40 +55,38 @@ class CreateUserUseCase {
     }
 
     private void validatePeselIsFormattedProperly(String pesel) {
-        if (pesel == null || pesel.length() != 11 || first6LettersHaveDateEncoded(pesel) || allCharactersAreNumbers(pesel)) {
+        if (pesel == null || pesel.length() != 11 || allCharactersAreNumbers(pesel)) {
             throw new CreatePersonInputError(String.format("Pesel is wrongly formated %s", pesel));
         }
     }
 
     private boolean allCharactersAreNumbers(String pesel) {
-        // TODO to implement
-        return false;
-    }
-
-    private boolean first6LettersHaveDateEncoded(String pesel) {
-        // TODO to implement
-        return false;
+        return !pesel.matches("\\d+");
     }
 
     private void validatePersonIsOlderThen18YearsOld(String pesel) {
-        //TODO
+        var birthDate = PeselUtils.getBirthDate(pesel);
+        var eighteenYearsOld = LocalDate.now().minusYears(18);
+        if (birthDate.isAfter(eighteenYearsOld)) {
+            throw new CreatePersonInputError(String.format("Person is to young with pesel: %s", pesel));
+        }
     }
 
     private void validatePeselIsUnique(String pesel) {
         if (userRepository.existsByPesel(pesel)) {
-            throw new UserNotFound(String.format("Pesel is not unique %s", pesel));
+            throw new CreatePersonInputError(String.format("Pesel is not unique %s", pesel));
         }
     }
 
     private void validateName(String name) {
         if (name.isEmpty()) {
-            throw new CreatePersonInputError(String.format("Name is wrongly formated %s", name));
+            throw new CreatePersonInputError(String.format("Name is wrongly formatted %s", name));
         }
     }
 
     private void validateSurname(String surname) {
         if (surname.isEmpty()) {
-            throw new CreatePersonInputError(String.format("Pesel is wrongly formated %s", surname));
+            throw new CreatePersonInputError(String.format("Pesel is wrongly formatted %s", surname));
         }
     }
 }
