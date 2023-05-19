@@ -21,7 +21,7 @@ class AccountEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     private UUID id;
-    private UUID userId;
+    private String userPesel;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyAccountEntity> currencyAccounts = new ArrayList<>();
 

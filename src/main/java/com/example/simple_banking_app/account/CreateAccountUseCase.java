@@ -15,7 +15,7 @@ class CreateAccountUseCase {
 
     public void execute(CreateAccount createAccount) {
         var accountToSave = new AccountEntity();
-        accountToSave.setUserId(createAccount.userId());
+        accountToSave.setUserPesel(createAccount.pesel());
         accountToSave.createCurrencyAccountForCurrency(CurrencyType.PLN, createAccount.statingAmountOfMoney());
         accountToSave.createCurrencyAccountForCurrency(CurrencyType.USD, 0);
         accountRepository.save(accountToSave);

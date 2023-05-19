@@ -9,8 +9,6 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.UUID;
-
 @Transactional
 class CreateUserUseCase {
     private final UserRepository userRepository;
@@ -23,7 +21,7 @@ class CreateUserUseCase {
         this.accountFacade = accountFacade;
     }
 
-    public UUID execute(CreateUser createUser) {
+    public String execute(CreateUser createUser) {
         validate(createUser);
         var userEntityToSave = new UserEntity();
 
@@ -32,8 +30,8 @@ class CreateUserUseCase {
         userEntityToSave.setPesel(createUser.pesel());
 
         var userEntity = userRepository.save(userEntityToSave);
-        accountFacade.createAccountsForUserId(new CreateAccount(userEntity.getId(), createUser.amountOfPLN()));
-        return userEntity.getId();
+        accountFacade.createAccountsForUserId(new CreateAccount(userEntity.getPesel(), createUser.amountOfPLN()));
+        return userEntity.getPesel();
     }
 
     private void validate(CreateUser createUser) {
@@ -76,7 +74,7 @@ class CreateUserUseCase {
     }
 
     private void validatePeselIsUnique(String pesel) {
-        if (userRepository.findByPesel(pesel)) {
+        if (userRepository.existsByPesel(pesel)) {
             throw new UserNotFound(String.format("Pesel is not unique %s", pesel));
         }
     }

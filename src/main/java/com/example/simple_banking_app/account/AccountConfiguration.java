@@ -19,8 +19,8 @@ class AccountConfiguration {
     }
 
     @Bean
-    GetAccountForUserUseCase getAccountForUserUseCase(AccountRepository accountRepository) {
-        return new GetAccountForUserUseCase(accountRepository);
+    GetAccountForUserPeselUseCase getAccountForUserUseCase(AccountRepository accountRepository) {
+        return new GetAccountForUserPeselUseCase(accountRepository);
     }
 
     @Bean
@@ -30,8 +30,8 @@ class AccountConfiguration {
     }
 
     @Bean
-    AccountFacade accountFacade(CreateAccountUseCase createAccountUseCase, GetAccountForUserUseCase getAccountForUserUseCase,
+    AccountFacade accountFacade(CreateAccountUseCase createAccountUseCase, GetAccountForUserPeselUseCase getAccountForUserPeselUseCase,
                                 ExchangeCurrencyUseCase exchangeCurrencyUseCase) {
-        return new AccountFacadeImpl(createAccountUseCase, getAccountForUserUseCase, exchangeCurrencyUseCase);
+        return new AccountFacadeImpl(createAccountUseCase, getAccountForUserPeselUseCase, exchangeCurrencyUseCase);
     }
 }

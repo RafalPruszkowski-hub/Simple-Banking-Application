@@ -5,19 +5,17 @@ import com.example.simple_banking_app.account.api.dto.AccountBuilder;
 import com.example.simple_banking_app.account.api.dto.CurrencyAccount;
 import com.example.simple_banking_app.account.api.dto.CurrencyAccountBuilder;
 
-import java.util.UUID;
-
-class GetAccountForUserUseCase {
+class GetAccountForUserPeselUseCase {
 
     private final AccountRepository accountRepository;
 
 
-    GetAccountForUserUseCase(AccountRepository accountRepository) {
+    GetAccountForUserPeselUseCase(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public Account execute(UUID userId) {
-        return map(accountRepository.getByUserId(userId));
+    Account execute(String userPesel) {
+        return map(accountRepository.getByUserPesel(userPesel));
     }
 
     private Account map(AccountEntity accountEntity) {

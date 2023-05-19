@@ -4,8 +4,6 @@ package com.example.simple_banking_app.account;
 import com.example.simple_banking_app.account.api.exceptions.AccountNotFound;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
 class AccountRepositoryImpl implements AccountRepository {
     private final JpaAccountRepository jpaAccountRepository;
@@ -15,9 +13,9 @@ class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public AccountEntity getByUserId(UUID userId) {
-        return jpaAccountRepository.findByUserId(userId)
-                .orElseThrow(() -> new AccountNotFound(String.format("Account not found for user id %s", userId)));
+    public AccountEntity getByUserPesel(String userPesel) {
+        return jpaAccountRepository.findByUserPesel(userPesel)
+                .orElseThrow(() -> new AccountNotFound(String.format("Account not found for user pesel %s", userPesel)));
     }
 
     @Override

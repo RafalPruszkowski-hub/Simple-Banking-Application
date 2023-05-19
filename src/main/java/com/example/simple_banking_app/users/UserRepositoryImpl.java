@@ -3,8 +3,6 @@ package com.example.simple_banking_app.users;
 
 import com.example.simple_banking_app.users.api.exceptions.UserNotFound;
 
-import java.util.UUID;
-
 
 class UserRepositoryImpl implements UserRepository {
     private final JpaUserRepository jpaUserRepository;
@@ -14,13 +12,13 @@ class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserEntity getByUserId(UUID userId) {
-        return jpaUserRepository.findById(userId).orElseThrow(() -> new UserNotFound(String.format("Not found person with id: %s ", userId)));
+    public UserEntity getByPesel(String pesel) {
+        return jpaUserRepository.findByPesel(pesel).orElseThrow(() -> new UserNotFound(String.format("Not found person with pesel: %s ", pesel)));
     }
 
     @Override
-    public boolean findByPesel(String pesel) {
-        return jpaUserRepository.existsByPesel(pesel);
+    public boolean existsByPesel(String userPesel) {
+        return jpaUserRepository.existsByPesel(userPesel);
     }
 
     @Override

@@ -4,8 +4,6 @@ import com.example.simple_banking_app.users.api.dto.CreateUser;
 import com.example.simple_banking_app.users.api.dto.User;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/user")
 class UsersController {
@@ -20,9 +18,9 @@ class UsersController {
         return userFacade.create(createUser);
     }
 
-    @RequestMapping("/{userId}")
+    @RequestMapping("/{pesel}")
     @GetMapping
-    User get(@PathVariable UUID userId) {
-        return userFacade.getUser(userId);
+    User get(@PathVariable String pesel) {
+        return userFacade.getUserByPesel(pesel);
     }
 }

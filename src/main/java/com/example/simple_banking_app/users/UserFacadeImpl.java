@@ -4,8 +4,6 @@ import com.example.simple_banking_app.users.api.dto.CreateUser;
 import com.example.simple_banking_app.users.api.dto.User;
 import com.example.simple_banking_app.users.api.UserFacade;
 
-import java.util.UUID;
-
 class UserFacadeImpl implements UserFacade {
     private final CreateUserUseCase createUserUseCase;
     private final GetUserUseCase getUserUseCase;
@@ -17,12 +15,11 @@ class UserFacadeImpl implements UserFacade {
 
     @Override
     public User create(CreateUser createUser) {
-        var userId = createUserUseCase.execute(createUser);
-        return getUser(userId);
+        var pesel = createUserUseCase.execute(createUser);
+        return getUserByPesel(pesel);
     }
 
-    @Override
-    public User getUser(UUID userId) {
-        return getUserUseCase.execute(userId);
+    public User getUserByPesel(String pesel) {
+        return getUserUseCase.execute(pesel);
     }
 }
