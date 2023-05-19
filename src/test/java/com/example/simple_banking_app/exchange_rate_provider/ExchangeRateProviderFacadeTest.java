@@ -1,7 +1,7 @@
 package com.example.simple_banking_app.exchange_rate_provider;
 
-import com.example.simple_banking_app.exchange_rate_provider.api.CurrencyType;
-import com.example.simple_banking_app.exchange_rate_provider.api.ExchangeRateNotFound;
+import com.example.simple_banking_app.account.api.dto.CurrencyType;
+import com.example.simple_banking_app.exchange_rate_provider.api.exception.ExchangeRateNotFound;
 import com.example.simple_banking_app.exchange_rate_provider.api.ExchangeRateProviderFacade;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

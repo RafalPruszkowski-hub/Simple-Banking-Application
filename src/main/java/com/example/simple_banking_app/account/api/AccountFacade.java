@@ -1,10 +1,13 @@
 package com.example.simple_banking_app.account.api;
 
-import java.util.List;
+import com.example.simple_banking_app.account.api.dto.Account;
+import com.example.simple_banking_app.account.api.dto.CreateAccount;
+
+import java.util.UUID;
 
 public interface AccountFacade {
 
-    List<Account> getAccountsForUserId();
+    Account getAccountsForUserId(UUID userId);
 
-    List<Account> createAccountsForUserId();
+    void createAccountsForUserId(CreateAccount createAccount);
 }

@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface JpaUserRepository extends JpaRepository<UserEntity, UUID> {
+interface JpaUserRepository extends JpaRepository<UserEntity, UUID> {
+    boolean existsByPesel(String pesel);
 }

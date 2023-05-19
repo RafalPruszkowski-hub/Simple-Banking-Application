@@ -1,8 +1,8 @@
 package com.example.simple_banking_app.exchange_rate_provider;
 
-import com.example.simple_banking_app.exchange_rate_provider.api.CurrencyType;
+import com.example.simple_banking_app.account.api.dto.CurrencyType;
 import com.example.simple_banking_app.exchange_rate_provider.api.ExchangeRateProviderFacade;
-import com.example.simple_banking_app.exchange_rate_provider.api.ExchangeRateResponse;
+import com.example.simple_banking_app.exchange_rate_provider.api.dto.ExchangeRateResponse;
 
 final class ExchangeRateProviderFacadeImpl implements ExchangeRateProviderFacade {
     private final ExchangeRateProviderUseCase exchangeRateProviderUseCase;

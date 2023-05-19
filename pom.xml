@@ -31,12 +31,12 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.soabase.record-builder</groupId>
-            <artifactId>record-builder</artifactId>
-            <version>36</version>
-        </dependency>
+        </dependency><dependency>
+        <groupId>io.soabase.record-builder</groupId>
+        <artifactId>record-builder-processor</artifactId>
+        <version>34</version>
+        <scope>provided</scope>
+    </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>

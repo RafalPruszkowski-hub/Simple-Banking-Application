@@ -8,7 +8,22 @@ import org.springframework.context.annotation.Configuration;
 class AccountConfiguration {
 
     @Bean
-    AccountFacade accountFacade() {
-        return new AccountFacadeImpl();
+    AccountRepository accountRepository(JpaAccountRepository jpaAccountRepository) {
+        return new AccountRepositoryImpl(jpaAccountRepository);
+    }
+
+    @Bean
+    CreateAccountUseCase createAccountUseCase(AccountRepository accountRepository) {
+        return new CreateAccountUseCase(accountRepository);
+    }
+
+    @Bean
+    GetAccountForUserUseCase getAccountForUserUseCase(AccountRepository accountRepository) {
+        return new GetAccountForUserUseCase(accountRepository);
+    }
+
+    @Bean
+    AccountFacade accountFacade(CreateAccountUseCase createAccountUseCase, GetAccountForUserUseCase getAccountForUserUseCase) {
+        return new AccountFacadeImpl(createAccountUseCase, getAccountForUserUseCase);
     }
 }
