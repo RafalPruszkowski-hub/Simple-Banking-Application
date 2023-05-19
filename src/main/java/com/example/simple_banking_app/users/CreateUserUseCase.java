@@ -23,13 +23,14 @@ class CreateUserUseCase {
         this.accountFacade = accountFacade;
     }
 
-    UUID execute(CreateUser createUser) {
+    public UUID execute(CreateUser createUser) {
         validate(createUser);
-        var userEntityToSave = UserEntity.builder()
-                .name(createUser.name())
-                .surname(createUser.surname())
-                .pesel(createUser.pesel())
-                .build();
+        var userEntityToSave = new UserEntity();
+
+        userEntityToSave.setName(createUser.name());
+        userEntityToSave.setSurname(createUser.surname());
+        userEntityToSave.setPesel(createUser.pesel());
+
         var userEntity = userRepository.save(userEntityToSave);
         accountFacade.createAccountsForUserId(new CreateAccount(userEntity.getId(), createUser.amountOfPLN()));
         return userEntity.getId();

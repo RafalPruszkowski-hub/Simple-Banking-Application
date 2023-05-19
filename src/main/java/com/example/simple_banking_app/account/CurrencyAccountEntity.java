@@ -2,7 +2,6 @@ package com.example.simple_banking_app.account;
 
 import com.example.simple_banking_app.account.api.dto.CurrencyType;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 class CurrencyAccountEntity {
     @Id

@@ -1,6 +1,7 @@
 package com.example.simple_banking_app.account;
 
 import com.example.simple_banking_app.account.api.AccountFacade;
+import com.example.simple_banking_app.exchange_rate_provider.api.ExchangeRateProviderFacade;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,7 +24,14 @@ class AccountConfiguration {
     }
 
     @Bean
-    AccountFacade accountFacade(CreateAccountUseCase createAccountUseCase, GetAccountForUserUseCase getAccountForUserUseCase) {
-        return new AccountFacadeImpl(createAccountUseCase, getAccountForUserUseCase);
+    ExchangeCurrencyUseCase exchangeCurrencyUseCase(AccountRepository accountRepository,
+                                                    ExchangeRateProviderFacade exchangeRateProviderFacade) {
+        return new ExchangeCurrencyUseCase(accountRepository, exchangeRateProviderFacade);
+    }
+
+    @Bean
+    AccountFacade accountFacade(CreateAccountUseCase createAccountUseCase, GetAccountForUserUseCase getAccountForUserUseCase,
+                                ExchangeCurrencyUseCase exchangeCurrencyUseCase) {
+        return new AccountFacadeImpl(createAccountUseCase, getAccountForUserUseCase, exchangeCurrencyUseCase);
     }
 }
